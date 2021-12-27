@@ -118,10 +118,10 @@ int [][]Z1={
 void testDeleteAndNext(){
   testDelete();
   nextShape=int(random(19));
-  if( random(2)<1 ) nextShape=1;
-  else if(random(2)<2) nextShape=6;
-  else nextShape=11;
-  nextShape=1;
+  //if( random(2)<1 ) nextShape=1;
+  //else if(random(2)<2) nextShape=6;
+  //else nextShape=11;
+  //nextShape=1;
   println(nextShape);
 }
 void testDelete(){
@@ -138,8 +138,8 @@ void testDelete(){
     }
   }
 }
-
 int nextShape=0;
+
 boolean L0safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+2][x]==0 && grid[y+2][x+1]==0)return true;
   return false;
@@ -426,7 +426,7 @@ void Z1(int x,int y){
 void setup(){
   size(300,500);
   nextShape=int(random(19));
-  println(nextShape);
+ // println(nextShape);
 }
 int b=0;
 float []vx={0,0,300,500};
@@ -474,359 +474,273 @@ void draw(){
       if(x<0)x=-x; 
     }
   }
-  if(rot==0){
-    if(nextShape==0){
-      L0(nowX,nowY);
-      if(frameCount%20==0){
-        //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-        //else{....}
-        if(nextShape==0 && L0safe(nowX,nowY+1))nowY++;
-        else{        
-          grid[nowY][nowX]=3;
-          grid[nowY+1][nowX]=3;
-          grid[nowY+2][nowX]=3;
-          grid[nowY+2][nowX+1]=3;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  if(rot==0||nextShape==0){
+    L0(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==0 && L0safe(nowX,nowY+1))nowY++;
+      else{        
+        grid[nowY][nowX]=3;
+        grid[nowY+1][nowX]=3;
+        grid[nowY+2][nowX]=3;
+        grid[nowY+2][nowX+1]=3;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==0||rot==1||rot==2||rot==3){
-    if(nextShape==1){
-      O0(nowX,nowY);
-      if(frameCount%20==0){
-        //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-        //else{....}
-        if(nextShape==1 && Osafe(nowX,nowY+1))nowY++;
-        else{      
-          grid[nowY][nowX]=4;
-          grid[nowY+1][nowX]=4;
-          grid[nowY][nowX+1]=4;
-          grid[nowY+1][nowX+1]=4;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==0||rot==1||rot==2||rot==3||nextShape==1){
+    O0(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==1 && Osafe(nowX,nowY+1))nowY++;
+      else{      
+        grid[nowY][nowX]=4;
+        grid[nowY+1][nowX]=4;
+        grid[nowY][nowX+1]=4;
+        grid[nowY+1][nowX+1]=4;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==0||rot==2){
-    if(nextShape==2){
-      I0(nowX,nowY);
-      if(frameCount%20==0){
-        //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-        //else{....}
-        if(nextShape==2 && I0safe(nowX,nowY+1))nowY++;
-        else{      
-          grid[nowY][nowX]=5;
-          grid[nowY][nowX+1]=5;
-          grid[nowY][nowX+2]=5;
-          grid[nowY][nowX+3]=5;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==0||rot==2||nextShape==2){
+    I0(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==2 && I0safe(nowX,nowY+1))nowY++;
+      else{      
+        grid[nowY][nowX]=5;
+        grid[nowY][nowX+1]=5;
+        grid[nowY][nowX+2]=5;
+        grid[nowY][nowX+3]=5;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==0){
-    if(nextShape==3){
-      J0(nowX,nowY);
-      if(frameCount%20==0){
-        //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-        //else{....}
-        if(nextShape==3 && J0safe(nowX,nowY+1))nowY++;
-        else{      
-          grid[nowY+2][nowX]=6;
-          grid[nowY+1][nowX+1]=6;
-          grid[nowY+2][nowX+1]=6;
-          grid[nowY][nowX+1]=6;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==0||nextShape==3){
+    J0(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==3 && J0safe(nowX,nowY+1))nowY++;
+      else{      
+        grid[nowY+2][nowX]=6;
+        grid[nowY+1][nowX+1]=6;
+        grid[nowY+2][nowX+1]=6;
+        grid[nowY][nowX+1]=6;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==0){
-    if(nextShape==4){
-      T0(nowX,nowY);
-      if(frameCount%20==0){
-        //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-        //else{....}
-        if(nextShape==4 && T0safe(nowX,nowY+1))nowY++;
-        else{      
-          grid[nowY][nowX]=7;
-          grid[nowY][nowX+1]=7;
-          grid[nowY][nowX+2]=7;
-          grid[nowY+1][nowX+1]=7;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==0||nextShape==4){
+    T0(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==4 && T0safe(nowX,nowY+1))nowY++;
+      else{      
+        grid[nowY][nowX]=7;
+        grid[nowY][nowX+1]=7;
+        grid[nowY][nowX+2]=7;
+        grid[nowY+1][nowX+1]=7;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==0||rot==2){
-    if(nextShape==5){
-      S0(nowX,nowY);
-      if(frameCount%20==0){
-        //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-        //else{....}
-        if(nextShape==5 && S0safe(nowX,nowY+1))nowY++;
-        else{      
-          grid[nowY][nowX]=8;
-          grid[nowY+1][nowX]=8;
-          grid[nowY+1][nowX+1]=8;
-          grid[nowY+2][nowX+1]=8;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==0||rot==2||nextShape==5){
+    S0(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==5 && S0safe(nowX,nowY+1))nowY++;
+      else{      
+        grid[nowY][nowX]=8;
+        grid[nowY+1][nowX]=8;
+        grid[nowY+1][nowX+1]=8;
+        grid[nowY+2][nowX+1]=8;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==0||rot==2){
-    if(nextShape==6){
-      Z0(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==6 && Z0safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY][nowX]=9;
-          grid[nowY+1][nowX+2]=9;
-          grid[nowY][nowX+1]=9;
-          grid[nowY+1][nowX+1]=9;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==0||rot==2||nextShape==6){
+    Z0(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==6 && Z0safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY][nowX]=9;
+        grid[nowY+1][nowX+2]=9;
+        grid[nowY][nowX+1]=9;
+        grid[nowY+1][nowX+1]=9;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==1){
-    if(nextShape==7){
-      L1(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==7 && L1safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY+1][nowX]=10;
-          grid[nowY+1][nowX+1]=10;
-          grid[nowY][nowX+2]=10;
-          grid[nowY+1][nowX+2]=10;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==1||nextShape==7){
+    L1(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==7 && L1safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY+1][nowX]=10;
+        grid[nowY+1][nowX+1]=10;
+        grid[nowY][nowX+2]=10;
+        grid[nowY+1][nowX+2]=10;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==1||rot==3){
-    if(nextShape==8){
-      I1(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==8 && I1safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY+3][nowX]=11;
-          grid[nowY+2][nowX]=11;
-          grid[nowY+1][nowX]=11;
-          grid[nowY][nowX]=11;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==1||rot==3||nextShape==8){
+    I1(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==8 && I1safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY+3][nowX]=11;
+        grid[nowY+2][nowX]=11;
+        grid[nowY+1][nowX]=11;
+        grid[nowY][nowX]=11;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==1){
-    if(nextShape==9){
-      J1(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==9 && J1safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY][nowX]=12;
-          grid[nowY+1][nowX]=12;
-          grid[nowY+1][nowX+1]=12;
-          grid[nowY+1][nowX+2]=12;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==1||nextShape==9){
+    J1(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==9 && J1safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY][nowX]=12;
+        grid[nowY+1][nowX]=12;
+        grid[nowY+1][nowX+1]=12;
+        grid[nowY+1][nowX+2]=12;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==1){
-    if(nextShape==10){
-      T1(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==10 && T1safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY+1][nowX+1]=13;
-          grid[nowY+1][nowX]=13;
-          grid[nowY][nowX+1]=13;
-          grid[nowY+1][nowX+2]=13;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  if(rot==1||nextShape==10){
+    T1(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==10 && T1safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY+1][nowX+1]=13;
+        grid[nowY+1][nowX]=13;
+        grid[nowY][nowX+1]=13;
+        grid[nowY+1][nowX+2]=13;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==1||rot==3){
-    if(nextShape==11){
-      S1(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==11 && S1safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY][nowX+1]=14;
-          grid[nowY][nowX+2]=14;
-          grid[nowY+1][nowX]=14;
-          grid[nowY+1][nowX+1]=14;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==1||rot==3||nextShape==11){
+    S1(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==11 && S1safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY][nowX+1]=14;
+        grid[nowY][nowX+2]=14;
+        grid[nowY+1][nowX]=14;
+        grid[nowY+1][nowX+1]=14;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==1||rot==3){
-    if(nextShape==12){
-      Z1(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==12 && Z1safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY+1][nowX]=15;
-          grid[nowY+2][nowX]=15;
-          grid[nowY][nowX+1]=15;
-          grid[nowY+1][nowX+1]=15;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  if(rot==1||rot==3||nextShape==12){
+    Z1(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==12 && Z1safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY+1][nowX]=15;
+        grid[nowY+2][nowX]=15;
+        grid[nowY][nowX+1]=15;
+        grid[nowY+1][nowX+1]=15;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==2){
-    if(nextShape==13){
-      L2(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==13 && L2safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY][nowX]=16;
-          grid[nowY+1][nowX+1]=16;
-          grid[nowY][nowX+1]=16;
-          grid[nowY+2][nowX+1]=16;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==2||nextShape==13){
+    L2(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==13 && L2safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY][nowX]=16;
+        grid[nowY+1][nowX+1]=16;
+        grid[nowY][nowX+1]=16;
+        grid[nowY+2][nowX+1]=16;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==2){
-    if(nextShape==14){
-      J2(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==14 && J2safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY][nowX]=17;
-          grid[nowY+2][nowX]=17;
-          grid[nowY+1][nowX]=17;
-          grid[nowY][nowX+1]=17;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==2||nextShape==14){
+    J2(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==14 && J2safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY][nowX]=17;
+        grid[nowY+2][nowX]=17;
+        grid[nowY+1][nowX]=17;
+        grid[nowY][nowX+1]=17;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==2){
-    if(nextShape==15){
-      T2(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==15 && T2safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY+1][nowX]=18;
-          grid[nowY][nowX+1]=18;
-          grid[nowY+1][nowX+1]=18;
-          grid[nowY+2][nowX+1]=18;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==2||nextShape==15){
+    T2(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==15 && T2safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY+1][nowX]=18;
+        grid[nowY][nowX+1]=18;
+        grid[nowY+1][nowX+1]=18;
+        grid[nowY+2][nowX+1]=18;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==3){
-    if(nextShape==16){
-      L3(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==16 && L3safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY][nowX]=19;
-          grid[nowY][nowX+1]=19;
-          grid[nowY][nowX+2]=19;
-          grid[nowY+1][nowX]=19;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==3||nextShape==16){
+    L3(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==16 && L3safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY][nowX]=19;
+        grid[nowY][nowX+1]=19;
+        grid[nowY][nowX+2]=19;
+        grid[nowY+1][nowX]=19;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==3){
-    if(nextShape==17){
-      J3(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==17 && J3safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY][nowX]=20;
-          grid[nowY+1][nowX+2]=20;
-          grid[nowY][nowX+1]=20;
-          grid[nowY][nowX+2]=20;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==3||nextShape==17){
+    J3(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==17 && J3safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY][nowX]=20;
+        grid[nowY+1][nowX+2]=20;
+        grid[nowY][nowX+1]=20;
+        grid[nowY][nowX+2]=20;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
-  if(rot==3){
-    if(nextShape==18){
-      T3(nowX,nowY);
-      if(frameCount%20==0){
-       // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
-      //  else{  }
-        if(nextShape==18 && T3safe(nowX,nowY+1))nowY++;
-        else{
-          grid[nowY][nowX]=21;
-          grid[nowY+1][nowX]=21;
-          grid[nowY+2][nowX]=21;
-          grid[nowY+1][nowX+1]=21;
-          nowX=6;nowY=1;
-          testDeleteAndNext();
-        }
+  else if(rot==3||nextShape==18){
+    T3(nowX,nowY);
+    if(frameCount%20==0){
+      if(nextShape==18 && T3safe(nowX,nowY+1))nowY++;
+      else{
+        grid[nowY][nowX]=21;
+        grid[nowY+1][nowX]=21;
+        grid[nowY+2][nowX]=21;
+        grid[nowY+1][nowX+1]=21;
+        nowX=6;nowY=1;
+        testDeleteAndNext();
       }
     }
   }
 }
-//boolean testSafe( int shape, int x, int y, int angle ){
-//  if(shape==1){
-//    testSafeShape1(x, y, angle);
-    
-    
-//  }else if(shape==2){
-//    testSafeShape2(x,y, angle);
-//  }
-//  return true;//safe
-//}
 int nowX=6,nowY=1;
 void keyPressed(){
   // if(keyCode==RIGHT && testSafe( nowShape, nowX+1, nowY, nowAngle)==true ){ b=3; nowX++; } 
