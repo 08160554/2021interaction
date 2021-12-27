@@ -138,47 +138,68 @@ void testDelete(){
     }
   }
 }
+
 int nextShape=0;
-boolean Lsafe(int x,int y){
+boolean L0safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+2][x]==0 && grid[y+2][x+1]==0)return true;
   return false;
 }
 void L0(int x,int y){
   fill(255,165,79);
-  if(Lsafe(x,y) ){
+  if(L0safe(x,y) ){
     rect(25*x    ,25*y    ,25,25);
     rect(25*x    ,25*(y+1),25,25);
     rect(25*x    ,25*(y+2),25,25);
     rect(25*(x+1),25*(y+2),25,25);
   }
 }
+
+//int nextShape=7;
+boolean L1safe(int x,int y){
+  if(grid[y+1][x]==0 && grid[y+1][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x+2]==0)return true;
+  return false;
+}
 void L1(int x,int y){
   fill(255,165,79);
-  if(Lsafe(x,y) ){
+  if(L1safe(x,y) ){
     rect(25*x    ,25*(y+1),25,25);
     rect(25*(x+1),25*(y+1),25,25);
     rect(25*(x+2),25*y    ,25,25);
     rect(25*(x+2),25*(y+1),25,25);
   }
 }
+
+//int nextShape=13;
+boolean L2safe(int x,int y){
+  if(grid[y][x]==0 && grid[y+1][x+1]==0 && grid[y][x+1]==0 && grid[y+2][x+1]==0)return true;
+  return false;
+}
 void L2(int x,int y){
   fill(255,165,79);
-  if(Lsafe(x,y) ){
+  if(L2safe(x,y) ){
     rect(25*x    ,25*y    ,25,25);
     rect(25*(x+1),25*(y+1),25,25);
     rect(25*(x+1),25*y    ,25,25);
     rect(25*(x+1),25*(y+2),25,25);
   }
 }
+
+//int nextShape=16;
+boolean L3safe(int x,int y){
+  if(grid[y][x]==0 && grid[y][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x]==0)return true;
+  return false;
+}
 void L3(int x,int y){
   fill(255,165,79);
-  if(Lsafe(x,y) ){
+  if(L3safe(x,y) ){
     rect(25*x    ,25*y    ,25,25);
     rect(25*(x+1),25*y    ,25,25);
     rect(25*(x+2),25*y    ,25,25);
     rect(25*x    ,25*(y+1),25,25);
   }
 }
+
+//int nextShape=1;
 boolean Osafe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x+1]==0 && grid[y+1][x]==0 && grid[y][x+1]==0)return true;
   return false;
@@ -192,156 +213,219 @@ void O0(int x,int y){
     rect(25*(x+1),25*(y+1),25,25);
   }
 }
-boolean Isafe(int x,int y){
+
+//int nextShape=2;
+boolean I0safe(int x,int y){
   if(grid[y][x]==0 && grid[y][x+1]==0 && grid[y][x+2]==0 && grid[y][x+3]==0)return true;
   return false;
 }
 void I0(int x,int y){
   fill(176,226,255);
-  if(Isafe(x,y) ){
+  if(I0safe(x,y) ){
     rect(25*x    ,25*y,25,25);
     rect(25*(x+1),25*y,25,25);
     rect(25*(x+2),25*y,25,25);
     rect(25*(x+3),25*y,25,25);
   }
 }
+
+//int nextShape=8;
+boolean I1safe(int x,int y){
+  if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+2][x]==0 && grid[y+3][x]==0)return true;
+  return false;
+}
 void I1(int x,int y){
   fill(176,226,255);
-  if(Isafe(x,y) ){
+  if(I1safe(x,y) ){
     rect(25*x    ,25*y,25,25);
     rect(25*x    ,25*(y+1),25,25);
     rect(25*x    ,25*(y+2),25,25);
     rect(25*x    ,25*(y+3),25,25);
   }
 }
-boolean Jsafe(int x,int y){
+
+//int nextShape=3;
+boolean J0safe(int x,int y){
   if(grid[y][x+1]==0 && grid[y+1][x+1]==0 && grid[y+2][x+1]==0 && grid[y+2][x]==0)return true;
   return false;
 }
 void J0(int x,int y){
   fill(106,90,205);
-  if(Jsafe(x,y) ){
+  if(J0safe(x,y) ){
     rect(25*x    ,25*(y+2),25,25);
     rect(25*(x+1),25*(y+1),25,25);
     rect(25*(x+1),25*(y+2),25,25);
     rect(25*(x+1),25*y,25,25);
   }
 }
+
+//int nextShape=9;
+boolean J1safe(int x,int y){
+  if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+1][x+1]==0 && grid[y+1][x+2]==0)return true;
+  return false;
+}
 void J1(int x,int y){
   fill(106,90,205);
-  if(Jsafe(x,y) ){
+  if(J1safe(x,y) ){
     rect(25*x    ,25*y    ,25,25);
     rect(25*x    ,25*(y+1),25,25);
     rect(25*(x+1),25*(y+1),25,25);
     rect(25*(x+2),25*(y+1),25,25);
   }
 }
+
+//int nextShape=14;
+boolean J2safe(int x,int y){
+  if(grid[y][x]==0 && grid[y+2][x]==0 && grid[y+1][x]==0 && grid[y][x+1]==0)return true;
+  return false;
+}
 void J2(int x,int y){
   fill(106,90,205);
-  if(Jsafe(x,y) ){
+  if(J2safe(x,y) ){
     rect(25*x    ,25*y    ,25,25);
     rect(25*x    ,25*(y+2),25,25);
     rect(25*x    ,25*(y+1),25,25);
     rect(25*(x+1),25*y,25,25);
   }
 }
+
+//int nextShape=17;
+boolean J3safe(int x,int y){
+  if(grid[y][x]==0 && grid[y+1][x+2]==0 && grid[y][x+1]==0 && grid[y][x+2]==0)return true;
+  return false;
+}
 void J3(int x,int y){
   fill(106,90,205);
-  if(Jsafe(x,y) ){
+  if(J3safe(x,y) ){
     rect(25*x    ,25*y,25,25);
     rect(25*(x+2),25*(y+1),25,25);
     rect(25*(x+1),25*y,25,25);
     rect(25*(x+2),25*y,25,25);
   }
 }
-boolean Tsafe(int x,int y){
+
+//int nextShape=17;
+boolean T0safe(int x,int y){
   if(grid[y][x]==0 && grid[y][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x+1]==0)return true;
   return false;
 }
 void T0(int x,int y){
   fill(205,181,205);
-  if(Tsafe(x,y) ){
+  if(T0safe(x,y) ){
     rect(25*x    ,25*y,25,25);
     rect(25*(x+1),25*y,25,25);
     rect(25*(x+2),25*y,25,25);
     rect(25*(x+1),25*(y+1),25,25);
   }
 }
+
+//int nextShape=10;
+boolean T1safe(int x,int y){
+  if(grid[y+1][x]==0 && grid[y+1][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x+2]==0)return true;
+  return false;
+}
 void T1(int x,int y){
   fill(205,181,205);
-  if(Tsafe(x,y) ){
+  if(T1safe(x,y) ){
     rect(25*(x+1),25*(y+1),25,25);
     rect(25*x    ,25*(y+1),25,25);
     rect(25*(x+1),25*y,25,25);
     rect(25*(x+2),25*(y+1),25,25);
   }
 }
+//int nextShape=15;
+boolean T2safe(int x,int y){
+  if(grid[y+1][x]==0 && grid[y][x+1]==0 && grid[y+1][x+1]==0 && grid[y+2][x+1]==0)return true;
+  return false;
+}
 void T2(int x,int y){
   fill(205,181,205);
-  if(Tsafe(x,y) ){
+  if(T2safe(x,y) ){
     rect(25*x    ,25*(y+1),25,25);
     rect(25*(x+1),25*y,25,25);
     rect(25*(x+1),25*(y+1),25,25);
     rect(25*(x+1),25*(y+2),25,25);
   }
 }
+
+//int nextShape=18;
+boolean T3safe(int x,int y){
+  if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+2][x]==0 && grid[y+1][x+1]==0)return true;
+  return false;
+}
 void T3(int x,int y){
   fill(205,181,205);
-  if(Tsafe(x,y) ){
+  if(T3safe(x,y) ){
     rect(25*x    ,25*y,25,25);
     rect(25*x    ,25*(y+1),25,25);
     rect(25*x    ,25*(y+2),25,25);
     rect(25*(x+1),25*(y+1),25,25);
   }
 }
-boolean Ssafe(int x,int y){
+
+//int nextShape=5;
+boolean S0safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+1][x+1]==0 && grid[y+2][x+1]==0)return true;
   return false;
 }
 void S0(int x,int y){
   fill(193,255,193);
-  if(Ssafe(x,y) ){
+  if(S0safe(x,y) ){
     rect(25*x    ,25*y,25,25);
     rect(25*x    ,25*(y+1),25,25);
     rect(25*(x+1),25*(y+1),25,25);
     rect(25*(x+1),25*(y+2),25,25);
   }
 }
+
+//int nextShape=11;
+boolean S1safe(int x,int y){
+  if(grid[y][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x]==0 && grid[y+1][x+1]==0)return true;
+  return false;
+}
 void S1(int x,int y){
   fill(193,255,193);
-  if(Ssafe(x,y) ){
+  if(S1safe(x,y) ){
     rect(25*(x+1),25*y,25,25);
     rect(25*(x+2),25*y,25,25);
     rect(25*x    ,25*(y+1),25,25);
     rect(25*(x+1),25*(y+1),25,25);
   }
 }
-boolean Zsafe(int x,int y){
-  if(grid[y+1][x+1]==0 && grid[y+2][x+1]==0 && grid[y+2][x]==0 && grid[y+3][x]==0)return true;
+
+//int nextShape=6;
+boolean Z0safe(int x,int y){
+  if(grid[y][x]==0 && grid[y+1][x+2]==0 && grid[y][x+1]==0 && grid[y+1][x+1]==0)return true;
   return false;
 }
 void Z0(int x,int y){
   fill(250,128,124);
-  if(Zsafe(x,y) ){
+  if(Z0safe(x,y) ){
     rect(25*x    ,25*y    ,25,25);
     rect(25*(x+2),25*(y+1),25,25);
     rect(25*(x+1),25*y    ,25,25);
     rect(25*(x+1),25*(y+1),25,25);
   }
 }
+
+//int nextShape=12;
+boolean Z1safe(int x,int y){
+  if(grid[y+1][x]==0 && grid[y+2][x]==0 && grid[y][x+1]==0 && grid[y+1][x+1]==0)return true;
+  return false;
+}
 void Z1(int x,int y){
   fill(250,128,124);
-  if(Zsafe(x,y) ){
+  if(Z1safe(x,y) ){
     rect(25*x    ,25*(y+1),25,25);
     rect(25*x    ,25*(y+2),25,25);
     rect(25*(x+1),25*y    ,25,25);
     rect(25*(x+1),25*(y+1),25,25);
   }
 }
+
 void setup(){
   size(300,500);
   nextShape=int(random(19));
-  nextShape=1;
   println(nextShape);
 }
 int b=0;
@@ -396,7 +480,7 @@ void draw(){
       if(frameCount%20==0){
         //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
         //else{....}
-        if(nextShape==0 && Lsafe(nowX,nowY+1))nowY++;
+        if(nextShape==0 && L0safe(nowX,nowY+1))nowY++;
         else{        
           grid[nowY][nowX]=3;
           grid[nowY+1][nowX]=3;
@@ -432,7 +516,7 @@ void draw(){
       if(frameCount%20==0){
         //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
         //else{....}
-        if(nextShape==2 && Isafe(nowX,nowY+1))nowY++;
+        if(nextShape==2 && I0safe(nowX,nowY+1))nowY++;
         else{      
           grid[nowY][nowX]=5;
           grid[nowY][nowX+1]=5;
@@ -450,7 +534,7 @@ void draw(){
       if(frameCount%20==0){
         //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
         //else{....}
-        if(nextShape==3 && Jsafe(nowX,nowY+1))nowY++;
+        if(nextShape==3 && J0safe(nowX,nowY+1))nowY++;
         else{      
           grid[nowY+2][nowX]=6;
           grid[nowY+1][nowX+1]=6;
@@ -468,7 +552,7 @@ void draw(){
       if(frameCount%20==0){
         //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
         //else{....}
-        if(nextShape==4 && Tsafe(nowX,nowY+1))nowY++;
+        if(nextShape==4 && T0safe(nowX,nowY+1))nowY++;
         else{      
           grid[nowY][nowX]=7;
           grid[nowY][nowX+1]=7;
@@ -486,7 +570,7 @@ void draw(){
       if(frameCount%20==0){
         //if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
         //else{....}
-        if(nextShape==5 && Ssafe(nowX,nowY+1))nowY++;
+        if(nextShape==5 && S0safe(nowX,nowY+1))nowY++;
         else{      
           grid[nowY][nowX]=8;
           grid[nowY+1][nowX]=8;
@@ -504,7 +588,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==6 && Z0safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY][nowX]=9;
           grid[nowY+1][nowX+2]=9;
@@ -522,7 +606,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==7 && L1safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY+1][nowX]=10;
           grid[nowY+1][nowX+1]=10;
@@ -540,7 +624,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==8 && I1safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY+3][nowX]=11;
           grid[nowY+2][nowX]=11;
@@ -558,7 +642,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==9 && J1safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY][nowX]=12;
           grid[nowY+1][nowX]=12;
@@ -576,7 +660,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==10 && T1safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY+1][nowX+1]=13;
           grid[nowY+1][nowX]=13;
@@ -594,7 +678,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==11 && S1safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY][nowX+1]=14;
           grid[nowY][nowX+2]=14;
@@ -612,7 +696,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==12 && Z1safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY+1][nowX]=15;
           grid[nowY+2][nowX]=15;
@@ -630,7 +714,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==13 && L2safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY][nowX]=16;
           grid[nowY+1][nowX+1]=16;
@@ -648,7 +732,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==14 && J2safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY][nowX]=17;
           grid[nowY+2][nowX]=17;
@@ -666,7 +750,7 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==15 && T2safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY+1][nowX]=18;
           grid[nowY][nowX+1]=18;
@@ -684,15 +768,14 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==16 && L3safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY][nowX]=19;
           grid[nowY][nowX+1]=19;
           grid[nowY][nowX+2]=19;
           grid[nowY+1][nowX]=19;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -703,15 +786,14 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==17 && J3safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY][nowX]=20;
           grid[nowY+1][nowX+2]=20;
           grid[nowY][nowX+1]=20;
           grid[nowY][nowX+2]=20;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -722,15 +804,14 @@ void draw(){
       if(frameCount%20==0){
        // if( testSafe(nowShape, nowY+1, nowX, nowAngle) ) nowY++;
       //  else{  }
-        if(nextShape==6 && Zsafe(nowX,nowY+1))nowY++;
+        if(nextShape==18 && T3safe(nowX,nowY+1))nowY++;
         else{
           grid[nowY][nowX]=21;
           grid[nowY+1][nowX]=21;
           grid[nowY+2][nowX]=21;
           grid[nowY+1][nowX+1]=21;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
