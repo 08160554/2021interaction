@@ -1,5 +1,5 @@
 int[][]grid={
-  {1,1,1,1,1,1,1,1,1,1,1,1},
+  {1,0,0,0,0,0,0,0,0,0,0,1},//  {1,1,1,1,1,1,1,1,1,1,1,1},
   {1,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,1},
@@ -16,8 +16,8 @@ int[][]grid={
   {1,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,1,1,1,1,1,1,1,1,1},
+  {1,0,0,1,1,1,1,1,1,1,1,1},
   {1,1,1,1,1,1,1,1,1,1,1,1}
 };
 int [][]L0={
@@ -76,19 +76,19 @@ int [][]J3={
   {0,0,0,0},
   {0,0,0,0}};
 int [][]T0={
-  {0,1,0,0},
   {1,1,1,0},
+  {0,1,0,0},
   {0,0,0,0},
   {0,0,0,0}};
 int [][]T1={
   {0,1,0,0},
-  {1,1,0,0},
-  {0,1,0,0},
+  {1,1,1,0},
+  {0,0,0,0},
   {0,0,0,0}};
 int [][]T2={
-  {1,1,1,0},
   {0,1,0,0},
-  {0,0,0,0},
+  {1,1,0,0},
+  {0,1,0,0},
   {0,0,0,0}};
 int [][]T3={
   {1,0,0,0},
@@ -96,14 +96,14 @@ int [][]T3={
   {1,0,0,0},
   {0,0,0,0}};
 int [][]S0={
-  {0,1,1,0},
-  {1,1,0,0},
-  {0,0,0,0},
-  {0,0,0,0}};
-int [][]S1={
   {1,0,0,0},
   {1,1,0,0},
   {0,1,0,0},
+  {0,0,0,0}};
+int [][]S1={
+  {0,1,1,0},
+  {1,1,0,0},
+  {0,0,0,0},
   {0,0,0,0}};
 int [][]Z0={
   {1,1,0,0},
@@ -115,16 +115,25 @@ int [][]Z1={
   {1,1,0,0},
   {1,0,0,0},
   {0,0,0,0}};
+void testDeleteAndNext(){
+  testDelete();
+  nextShape=int(random(19));
+  if( random(2)<1 ) nextShape=1;
+  else if(random(2)<2) nextShape=6;
+  else nextShape=11;
+  nextShape=1;
+  println(nextShape);
+}
 void testDelete(){
-  for(int i=19;i>=0;i--){
+  for(int i=18;i>0;i--){//modified
     int bad=0;
-    for(int j=0;j<12;j++){
+    for(int j=1;j<11;j++){//modified
       if(grid[i][j]!=0)bad++;
     }
-    if(bad==12){
-      for(int ii=i;ii>=1;ii++){
-        for(int j=0;j<12;j++)grid[ii][j]=grid[ii-1][j];
-      }
+    if(bad==10){//這裡的 i,j有弄反了!!!
+      for(int ii=i;ii>1;ii--){//有錯
+        for(int j=1;j<11;j++)grid[ii][j]=grid[ii-1][j];
+      }//這裡的 j<12才對,或是改用i,總之要想想!!!!
     }
   }
 }
@@ -330,7 +339,9 @@ void Z1(int x,int y){
 }
 void setup(){
   size(300,500);
-  nextShape=int(random(6));
+  nextShape=int(random(19));
+  nextShape=1;
+  println(nextShape);
 }
 int b=0;
 float []vx={0,0,300,500};
@@ -391,8 +402,7 @@ void draw(){
           grid[nowY+2][nowX]=3;
           grid[nowY+2][nowX+1]=3;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -410,8 +420,7 @@ void draw(){
           grid[nowY][nowX+1]=4;
           grid[nowY+1][nowX+1]=4;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -429,8 +438,7 @@ void draw(){
           grid[nowY][nowX+2]=5;
           grid[nowY][nowX+3]=5;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -448,8 +456,7 @@ void draw(){
           grid[nowY+2][nowX+1]=6;
           grid[nowY][nowX+1]=6;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -467,8 +474,7 @@ void draw(){
           grid[nowY][nowX+2]=7;
           grid[nowY+1][nowX+1]=7;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -486,8 +492,7 @@ void draw(){
           grid[nowY+1][nowX+1]=8;
           grid[nowY+2][nowX+1]=8;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -505,8 +510,7 @@ void draw(){
           grid[nowY][nowX+1]=9;
           grid[nowY+1][nowX+1]=9;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -524,8 +528,7 @@ void draw(){
           grid[nowY][nowX+2]=10;
           grid[nowY+1][nowX+2]=10;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -543,8 +546,7 @@ void draw(){
           grid[nowY+1][nowX]=11;
           grid[nowY][nowX]=11;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -562,8 +564,7 @@ void draw(){
           grid[nowY+1][nowX+1]=12;
           grid[nowY+1][nowX+2]=12;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -581,8 +582,7 @@ void draw(){
           grid[nowY][nowX+1]=13;
           grid[nowY+1][nowX+2]=13;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -600,8 +600,7 @@ void draw(){
           grid[nowY+1][nowX]=14;
           grid[nowY+1][nowX+1]=14;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -619,8 +618,7 @@ void draw(){
           grid[nowY][nowX+1]=15;
           grid[nowY+1][nowX+1]=15;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -638,8 +636,7 @@ void draw(){
           grid[nowY][nowX+1]=16;
           grid[nowY+2][nowX+1]=16;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -657,8 +654,7 @@ void draw(){
           grid[nowY+1][nowX]=17;
           grid[nowY][nowX+1]=17;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
@@ -676,8 +672,7 @@ void draw(){
           grid[nowY+1][nowX+1]=18;
           grid[nowY+2][nowX+1]=18;
           nowX=6;nowY=1;
-          testDelete();
-          nextShape=int(random(19));
+          testDeleteAndNext();
         }
       }
     }
