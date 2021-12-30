@@ -46,13 +46,13 @@ int [][]O0={
   {0,0,0,0},
   {0,0,0,0}};
 int [][]I0={
-  {0,0,1,0},
-  {0,0,1,0},
-  {0,0,1,0},
-  {0,0,1,0}};
+  {1,0,0,0},
+  {1,0,0,0},
+  {1,0,0,0},
+  {1,0,0,0}};
 int [][]I1={
-  {0,0,0,0},
   {1,1,1,1},
+  {0,0,0,0},
   {0,0,0,0},
   {0,0,0,0}};
 int [][]J0={
@@ -119,27 +119,28 @@ int [][]Z1={
 void testDeleteAndNext(){
   testDelete();
   nextShape=int(random(6));
-  //if( random(2)<1 ) nextShape=1;
-  //else if(random(2)<2) nextShape=6;
-  //else nextShape=11;
-  //nextShape=1;
   println(nextShape);
 }
+void Gameover(){
+  textSize(50);
+  fill(255);
+  text("Game Over", 20, 250); 
+  stop();
+}
 void testDelete(){
-  for(int i=18;i>0;i--){//modified
+  for(int i=18;i>0;i--){
     int bad=0;
-    for(int j=1;j<11;j++){//modified
+    for(int j=1;j<11;j++){
       if(grid[i][j]!=0)bad++;
     }
-    if(bad==10){//這裡的 i,j有弄反了!!!
-      for(int ii=i;ii>1;ii--){//有錯
+    if(bad==10){
+      for(int ii=i;ii>1;ii--){
         for(int j=1;j<11;j++)grid[ii][j]=grid[ii-1][j];
-      }//這裡的 j<12才對,或是改用i,總之要想想!!!!
+      }
       i++;
     }
   }
 }
-
 int nextShape=0;
 
 boolean L0safe(int x,int y){
@@ -156,7 +157,6 @@ void L0(int x,int y){
   }
 }
 
-//int nextShape=7;
 boolean L1safe(int x,int y){
   if(grid[y+1][x]==0 && grid[y+1][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x+2]==0)return true;
   return false;
@@ -171,7 +171,6 @@ void L1(int x,int y){
   }
 }
 
-//int nextShape=13;
 boolean L2safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x+1]==0 && grid[y][x+1]==0 && grid[y+2][x+1]==0)return true;
   return false;
@@ -186,7 +185,6 @@ void L2(int x,int y){
   }
 }
 
-//int nextShape=16;
 boolean L3safe(int x,int y){
   if(grid[y][x]==0 && grid[y][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x]==0)return true;
   return false;
@@ -201,7 +199,6 @@ void L3(int x,int y){
   }
 }
 
-//int nextShape=1;
 boolean Osafe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x+1]==0 && grid[y+1][x]==0 && grid[y][x+1]==0)return true;
   return false;
@@ -216,7 +213,6 @@ void O0(int x,int y){
   }
 }
 
-//int nextShape=2;
 boolean I0safe(int x,int y){
   if(grid[y][x]==0 && grid[y][x+1]==0 && grid[y][x+2]==0 && grid[y][x+3]==0)return true;
   return false;
@@ -231,7 +227,6 @@ void I0(int x,int y){
   }
 }
 
-//int nextShape=8;
 boolean I1safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+2][x]==0 && grid[y+3][x]==0)return true;
   return false;
@@ -246,7 +241,6 @@ void I1(int x,int y){
   }
 }
 
-//int nextShape=3;
 boolean J0safe(int x,int y){
   if(grid[y][x+1]==0 && grid[y+1][x+1]==0 && grid[y+2][x+1]==0 && grid[y+2][x]==0)return true;
   return false;
@@ -261,7 +255,6 @@ void J0(int x,int y){
   }
 }
 
-//int nextShape=9;
 boolean J1safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+1][x+1]==0 && grid[y+1][x+2]==0)return true;
   return false;
@@ -276,7 +269,6 @@ void J1(int x,int y){
   }
 }
 
-//int nextShape=14;
 boolean J2safe(int x,int y){
   if(grid[y][x]==0 && grid[y+2][x]==0 && grid[y+1][x]==0 && grid[y][x+1]==0)return true;
   return false;
@@ -291,7 +283,6 @@ void J2(int x,int y){
   }
 }
 
-//int nextShape=17;
 boolean J3safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x+2]==0 && grid[y][x+1]==0 && grid[y][x+2]==0)return true;
   return false;
@@ -306,7 +297,6 @@ void J3(int x,int y){
   }
 }
 
-//int nextShape=17;
 boolean T0safe(int x,int y){
   if(grid[y][x]==0 && grid[y][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x+1]==0)return true;
   return false;
@@ -321,7 +311,6 @@ void T0(int x,int y){
   }
 }
 
-//int nextShape=10;
 boolean T1safe(int x,int y){
   if(grid[y+1][x]==0 && grid[y+1][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x+2]==0)return true;
   return false;
@@ -335,7 +324,7 @@ void T1(int x,int y){
     rect(25*(x+2),25*(y+1),25,25);
   }
 }
-//int nextShape=15;
+
 boolean T2safe(int x,int y){
   if(grid[y+1][x]==0 && grid[y][x+1]==0 && grid[y+1][x+1]==0 && grid[y+2][x+1]==0)return true;
   return false;
@@ -350,7 +339,6 @@ void T2(int x,int y){
   }
 }
 
-//int nextShape=18;
 boolean T3safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+2][x]==0 && grid[y+1][x+1]==0)return true;
   return false;
@@ -365,7 +353,6 @@ void T3(int x,int y){
   }
 }
 
-//int nextShape=5;
 boolean S0safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x]==0 && grid[y+1][x+1]==0 && grid[y+2][x+1]==0)return true;
   return false;
@@ -380,7 +367,6 @@ void S0(int x,int y){
   }
 }
 
-//int nextShape=11;
 boolean S1safe(int x,int y){
   if(grid[y][x+1]==0 && grid[y][x+2]==0 && grid[y+1][x]==0 && grid[y+1][x+1]==0)return true;
   return false;
@@ -395,7 +381,6 @@ void S1(int x,int y){
   }
 }
 
-//int nextShape=6;
 boolean Z0safe(int x,int y){
   if(grid[y][x]==0 && grid[y+1][x+2]==0 && grid[y][x+1]==0 && grid[y+1][x+1]==0)return true;
   return false;
@@ -410,7 +395,6 @@ void Z0(int x,int y){
   }
 }
 
-//int nextShape=12;
 boolean Z1safe(int x,int y){
   if(grid[y+1][x]==0 && grid[y+2][x]==0 && grid[y][x+1]==0 && grid[y+1][x+1]==0)return true;
   return false;
@@ -428,8 +412,8 @@ void Z1(int x,int y){
 void setup(){
   size(300,500);
   nextShape=int(random(6));
- // println(nextShape);
 }
+
 int b=0;
 float []vx={0,0,300,500};
 int rot=0;
@@ -442,26 +426,11 @@ void draw(){
   else if(nextShape==4)T0(nowX,nowY);
   else if(nextShape==5)S0(nowX,nowY);
   else if(nextShape==6)Z0(nowX,nowY);
-  
-  //else if(nextShape==7)L1(nowX,nowY); //<>//
-  //else if(nextShape==8)I1(nowX,nowY);
-  //else if(nextShape==9)J1(nowX,nowY);
-  //else if(nextShape==10)T1(nowX,nowY);
-  //else if(nextShape==11)S1(nowX,nowY);
-  //else if(nextShape==12)Z1(nowX,nowY);
-  
-  //else if(nextShape==13)L2(nowX,nowY);  
-  //else if(nextShape==14)J2(nowX,nowY);
-  //else if(nextShape==15)T2(nowX,nowY);
-  
-  //else if(nextShape==16)L3(nowX,nowY);
-  //else if(nextShape==17)J3(nowX,nowY);
-  //else if(nextShape==18)T3(nowX,nowY);
-  //else if(nextShape==19)L1(nowX,nowY);
-  
+
   for(int x=0;x<12;x++){
     for(int y=0;y<20;y++){
-      if(grid[y][x]==1)fill(70,130,180);//wall
+      if(y==0) fill(70,130,180);
+      else if(grid[y][x]==1)fill(70,130,180);//wall
       else if(grid[y][x]==2)fill(250,128,124);
       else if(grid[y][x]==3 || grid[y][x]==10 || grid[y][x]==16 || grid[y][x]==19)fill(255,165,79); //orangeL
       else if(grid[y][x]==4)fill(238,230,133);//yellowO
@@ -485,8 +454,11 @@ void draw(){
         grid[nowY+1][nowX]=3;
         grid[nowY+2][nowX]=3;
         grid[nowY+2][nowX+1]=3;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(L0safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -499,8 +471,11 @@ void draw(){
         grid[nowY+1][nowX]=4;
         grid[nowY][nowX+1]=4;
         grid[nowY+1][nowX+1]=4;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(Osafe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -513,8 +488,11 @@ void draw(){
         grid[nowY][nowX+1]=5;
         grid[nowY][nowX+2]=5;
         grid[nowY][nowX+3]=5;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(I0safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -527,8 +505,11 @@ void draw(){
         grid[nowY+1][nowX+1]=6;
         grid[nowY+2][nowX+1]=6;
         grid[nowY][nowX+1]=6;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(J0safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -541,8 +522,11 @@ void draw(){
         grid[nowY][nowX+1]=7;
         grid[nowY][nowX+2]=7;
         grid[nowY+1][nowX+1]=7;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(T0safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -555,8 +539,11 @@ void draw(){
         grid[nowY+1][nowX]=8;
         grid[nowY+1][nowX+1]=8;
         grid[nowY+2][nowX+1]=8;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(S0safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -569,8 +556,11 @@ void draw(){
         grid[nowY+1][nowX+2]=9;
         grid[nowY][nowX+1]=9;
         grid[nowY+1][nowX+1]=9;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(Z0safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -583,8 +573,11 @@ void draw(){
         grid[nowY+1][nowX+1]=10;
         grid[nowY][nowX+2]=10;
         grid[nowY+1][nowX+2]=10;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(L1safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -597,8 +590,11 @@ void draw(){
         grid[nowY+2][nowX]=11;
         grid[nowY+1][nowX]=11;
         grid[nowY][nowX]=11;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(I1safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -611,8 +607,11 @@ void draw(){
         grid[nowY+1][nowX]=12;
         grid[nowY+1][nowX+1]=12;
         grid[nowY+1][nowX+2]=12;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(J1safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -625,8 +624,11 @@ void draw(){
         grid[nowY+1][nowX]=13;
         grid[nowY][nowX+1]=13;
         grid[nowY+1][nowX+2]=13;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(T1safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -639,8 +641,11 @@ void draw(){
         grid[nowY][nowX+2]=14;
         grid[nowY+1][nowX]=14;
         grid[nowY+1][nowX+1]=14;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(S1safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -653,8 +658,11 @@ void draw(){
         grid[nowY+2][nowX]=15;
         grid[nowY][nowX+1]=15;
         grid[nowY+1][nowX+1]=15;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(Z1safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -667,8 +675,11 @@ void draw(){
         grid[nowY+1][nowX+1]=16;
         grid[nowY][nowX+1]=16;
         grid[nowY+2][nowX+1]=16;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(L2safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -681,8 +692,11 @@ void draw(){
         grid[nowY+2][nowX]=17;
         grid[nowY+1][nowX]=17;
         grid[nowY][nowX+1]=17;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(J2safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -695,8 +709,11 @@ void draw(){
         grid[nowY][nowX+1]=18;
         grid[nowY+1][nowX+1]=18;
         grid[nowY+2][nowX+1]=18;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(T2safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -709,8 +726,11 @@ void draw(){
         grid[nowY][nowX+1]=19;
         grid[nowY][nowX+2]=19;
         grid[nowY+1][nowX]=19;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(L3safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -723,8 +743,11 @@ void draw(){
         grid[nowY+1][nowX+2]=20;
         grid[nowY][nowX+1]=20;
         grid[nowY][nowX+2]=20;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(J3safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
@@ -737,26 +760,19 @@ void draw(){
         grid[nowY+1][nowX]=21;
         grid[nowY+2][nowX]=21;
         grid[nowY+1][nowX+1]=21;
-        nowX=6;nowY=1;
+        nowX=6;nowY=0;
         testDeleteAndNext();
+        if(T3safe(nowX,nowY)==false ){
+          Gameover();   
+        }
       }
     }
   }
-  if(grid[nowX][nowY]==1)stop();
 }
 int nowX=6,nowY=1;
 void keyPressed(){
-  // if(keyCode==RIGHT && testSafe( nowShape, nowX+1, nowY, nowAngle)==true ){ b=3; nowX++; } 
   if(keyCode==RIGHT && grid[nowY][nowX+1]==0 ){ b=3; nowX++; }
   if(keyCode==LEFT && grid[nowY][nowX-1]==0 ) { b=2; nowX--; }
   if(keyCode==UP)rot=(rot+1)%4;
   if(keyCode==DOWN){ b=0; nowY++; }
-}
-void gameover(){
-  if(grid[nowX][nowY]==1){
-    fill(255,0,0);
-    textSize(50);
-    text("Game Over", width/2-130, height/2);
-}
-  stop();
 }
